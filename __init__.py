@@ -26,7 +26,7 @@ class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
 
             for pilotRace in pilotRaces:
                 pilot_id = pilotRace.pilot_id
-                node_id = pilotRace.node_id
+                node_id = pilotRace.node_index
 
                 if pilot_id not in calib_data:
                     calib_data[pilot_id] = {}
