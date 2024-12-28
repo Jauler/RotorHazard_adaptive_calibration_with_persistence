@@ -2,6 +2,7 @@
 
 import logging
 import json
+import os
 from eventmanager import Evt
 from calibration import CalibrationMethod
 from calibration import AdaptiveCalibrationMethod
@@ -17,9 +18,17 @@ class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
 
     def store_calibration_values(self, rhapi):
         pilotRaces = rhapi.rhdata.get_savedPilotRaces()
-        with open(PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "w+") as f:
+
+        # Determine required mode.
+        # Note: "a+" mode is not suitable for us, because even with the presense
+        # of f.seek(0) - it will write at the end of file.
+        if os.path.exists(PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME):
+            mode = "r+"
+        else:
+            mode = "w+" # Creates empty file if it does not exist
+
+        with open(PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME, mode) as f:
             try:
-                f.seek(0)
                 calib_data = json.loads(f.read())
             except Exception as e:
                 logger.warning(f"Failed to load adaptive calibration values: {e}. Starting empty.")
