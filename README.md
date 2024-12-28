@@ -19,7 +19,7 @@ sudo systemctl restart rotorhazard.service
 Then go to Calibration Modes in settings tab and select "Adaptive with Persistence":
 ![mode-selection](img/mode-selection.png)
 
-## Clearing persistant data
+## Clearing persistent data
 
 Currently there is no user-friendly method to delete persistent data, therefore it have to be done manually:
 

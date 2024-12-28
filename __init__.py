@@ -8,7 +8,7 @@ from calibration import AdaptiveCalibrationMethod
 
 logger = logging.getLogger(__name__)
 
-PERSISTANT_ADAPTIVE_CALIBRATION_DATA_FILENAME = "adaptive-calibration-persitant-data.json"
+PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME = "adaptive-calibration-persistent-data.json"
 
 class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
     def __init__(self):
@@ -17,8 +17,9 @@ class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
 
     def store_calibration_values(self, rhapi):
         pilotRaces = rhapi.rhdata.get_savedPilotRaces()
-        with open(PERSISTANT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "w+") as f:
+        with open(PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "w+") as f:
             try:
+                f.seek(0)
                 calib_data = json.loads(f.read())
             except Exception as e:
                 logger.warning(f"Failed to load adaptive calibration values: {e}. Starting empty.")
@@ -41,7 +42,7 @@ class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
 
     def retrieve_stored_calibration_values(self, _, node, pilot_id):
         try:
-            with open(PERSISTANT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "r") as f:
+            with open(PERSISTENT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "r") as f:
                 calib_data = json.loads(f.read())
                 node_id = node.index
                 if pilot_id not in calib_data:
