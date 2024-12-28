@@ -17,7 +17,7 @@ class AdaptiveWithPersistanceCalibrationMethod(CalibrationMethod):
 
     def store_calibration_values(self, rhapi):
         pilotRaces = rhapi.rhdata.get_savedPilotRaces()
-        with open(PERSISTANT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "r+") as f:
+        with open(PERSISTANT_ADAPTIVE_CALIBRATION_DATA_FILENAME, "w+") as f:
             try:
                 calib_data = json.loads(f.read())
             except Exception as e:
