@@ -1,0 +1,13 @@
+{
+    "name": "Calibration method: Adaptive with persistence",
+    "author": "Jauler",
+    "author_uri": "https://github.com/Jauler",
+    "description": "Stores per-pilot-per-node calibration values event between events",
+    "info_uri": "https://github.com/Jauler/RotorHazard_adaptive_calibration_with_persistence",
+    "license": "MIT",
+    "license_uri": "https://github.com/Jauler/RotorHazard-adaptive-calibration-with-persistence/blob/main/LICENSE",
+    "version": "1.0.0",
+    "required_rhapi_version": "1.0",
+    "update_uri": null,
+    "text_domain": null
+}
